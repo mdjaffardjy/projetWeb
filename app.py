@@ -65,6 +65,12 @@ def random():
 def albums():
     return render_template('albums.html',images=IMAGES)
 
+
+@app.route('/form', methods=['POST','GET'])
+def form():
+    response = render_template('form.html')
+    return response
+
 @app.route('/add/', methods=['POST','GET'])
 def add():
     app.logger.debug('add')
@@ -79,11 +85,6 @@ def add():
     response = render_template('form.html')
     return response
 
-@app.route('/form', methods=['POST','GET'])
-def form():
-    response = render_template('form.html')
-    return response
-    
 @app.route('/search/', methods=['POST','GET'])
 def search():
     app.logger.debug('search')

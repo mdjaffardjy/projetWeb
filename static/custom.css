@@ -76,4 +76,19 @@ p.info {
 
 }
 
+/* Likes
+-------------------------------------------------- */
+img.heart{
+  width: 20px;
+  heigth: 20px;
+}
+
+img.heart:hover{
+  opacity: 0.5;
+}
+
+img.heart:visited {
+  color: green;
+}
+
 

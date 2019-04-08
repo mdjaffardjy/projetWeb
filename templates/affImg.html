@@ -11,8 +11,7 @@
               </p>
               <p class="info">
               Posted on : {{img.date}}<br />
-              {{img.note}} <i class="material-icons" style="font-size:20px;color:crimson;">favorite</i><br />
-	      |
+              <img class="heart" method="get" action="/upvote/" src="https://purepng.com/public/uploads/large/heart-icon-y1k.png" >{{img.note}}<br />
               {% for th in img.themes %}
                   #{{th}} |
               {% endfor %}
