@@ -4,18 +4,20 @@
     <main role="main" class="container">
     {% block content %}
 	{% if images %}
-          {% for img in images %}
-              <h2 class="mt-5">{{img.title}}</h2>
-              <p>
-              <img src="{{img.path}}" width="50" height="50">
-              Posted on : {{img.date}}
-              Note : {{img.notes}}
-              Related themes : |
+          {% for img in images %}              
+              <h2 class="caption">{{img.title}}</h2>
+	      <p>
+              <img src="{{img.path}}">
+              </p>
+              <p class="info">
+              Posted on : {{img.date}}<br />
+              {{img.note}} <i class="material-icons" style="font-size:20px;color:crimson;">favorite</i><br />
+	      |
               {% for th in img.themes %}
                   #{{th}} |
               {% endfor %}
               </p>
-              <br />
+              <br /><hr/>
           {% endfor %}
       {% else %}
           <div class="alert alert-info" role="alert">

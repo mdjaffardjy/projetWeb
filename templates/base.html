@@ -3,6 +3,7 @@
   <head>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="icon" href="https://www.insa-lyon.fr/sites/www.insa-lyon.fr/files/insa_favicon.ico">
   	<title>Neurchi de BIM Cave</title>
 
@@ -28,19 +29,19 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('Latest') }}">Latest</a>
+              <a class="nav-link" href="{{ url_for('latest') }}">Latest</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('Trending') }}">Trending</a>
+              <a class="nav-link" href="{{ url_for('trending') }}">Trending</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('Random') }}">Random</a>
+              <a class="nav-link" href="{{ url_for('random') }}">Random</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('Albums') }}">Albums</a>
+              <a class="nav-link" href="{{ url_for('albums') }}">Albums</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('Add') }}">Add Contribution</a>
+              <a class="nav-link" href="{{ url_for('form') }}">Add Contribution</a>
             </li>
           </ul>
           <form class="form-inline mt-2 mt-md-0" method="get" action="/search/">

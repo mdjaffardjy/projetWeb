@@ -46,56 +46,61 @@ def index():
 
 
 @app.route('/latest')
-def Latest():
+def latest():
     return render_template('latest.html',images=IMAGES)
 
 @app.route('/trending')
-def Trending():
+def trending():
     return render_template('trending.html',images=IMAGES)
 
 @app.route('/random')
-def Random():
+def random():
     return render_template('random.html',images=IMAGES)
 
 @app.route('/albums')
-def Albums():
+def albums():
     return render_template('albums.html',images=IMAGES)
 
 @app.route('/add/', methods=['POST','GET'])
-def Add():
+def add():
     app.logger.debug('add')
-#    form=request.form
+    form=request.form
 #    if str(form['themes'])!="NA" :
 #        th=[str(form['themes'])]
 #    else :
 #        th=[]
-#    path=form['url']
-#    newImg={'title': form['title'], 'path': path, 'notes': [], 'themes': th}
-#    IMAGES.append(newImg)
-    response = render_template('add.html')
+    path=form['url']
+    newImg={'title': form['title'], 'path': path, 'note': 0}
+    IMAGES.append(newImg)
+    response = render_template('form.html')
+    return response
+
+@app.route('/form', methods=['POST','GET'])
+def form():
+    response = render_template('form.html')
     return response
     
 @app.route('/search/', methods=['POST','GET'])
 def search():
     app.logger.debug('search')
-    abort(make_response('Not implemented yet ;)', 501))
-#    error = None
-#    sw = request.args.get('pattern')
-#    r = request.args.get('regexp')
-#    RES=[]
-#    if sw :
-#        if r=="on" : # RECHERCHE PAR THEME
-#            for img in IMAGES :
-#                if sw in img['themes'] :
-#                    RES.append(img)
-#        else : # RECHERCHE PAR MOTS CLES
-#            for img in IMAGES :
-#                if sw.capitalize() in img['title'].capitalize() :
-#                    RES.append(img)
-#    if request.method == 'GET':
-#        response = render_template('search.html',images=RES, sw=sw, r=r)
-#    else :
-#        response = render_template('search.html',error=error)
+    #abort(make_response('Not implemented yet ;)', 501))
+    error = None
+    sw = request.args.get('pattern')
+    r = request.args.get('regexp')
+    RES=[]
+    if sw :
+        if r=="on" : # RECHERCHE PAR THEME
+            for img in IMAGES :
+                if sw in img['themes'] :
+                    RES.append(img)
+        else : # RECHERCHE PAR MOTS CLES
+            for img in IMAGES :
+                if sw.capitalize() in img['title'].capitalize() :
+                    RES.append(img)
+    if request.method == 'GET':
+        response = render_template('search.html',images=RES, sw=sw, r=r)
+    else :
+        response = render_template('search.html',error=error)
     return response
 
 # Script starts here
