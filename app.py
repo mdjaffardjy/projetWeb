@@ -6,6 +6,7 @@ from datetime import datetime
 from flask import Flask
 from flask import abort, request, make_response
 from flask import render_template, redirect, url_for
+from random import choice
 
 app = Flask(__name__)
 from data import IMAGES
@@ -55,7 +56,10 @@ def trending():
 
 @app.route('/random')
 def random():
-    return render_template('random.html',images=IMAGES)
+    new=[]
+    randomImg = choice(IMAGES)
+    new.append(randomImg)
+    return render_template('random.html',images=new)
 
 @app.route('/albums')
 def albums():
