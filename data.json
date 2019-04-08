@@ -1,0 +1,11 @@
+{
+  "IMAGES" : [
+    {"id": 0,
+     "titre": "image 1", "note": "0", "chemin": "images/math.jpg"}
+    
+],
+  "THEMES" : {
+    "humour": [0]
+    }
+}
+
