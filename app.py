@@ -45,26 +45,26 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/Home')
+@app.route('/home')
 def Home():
     return render_template('home.html')
 
-@app.route('/Latest')
+@app.route('/latest')
 def Latest():
     return render_template('latest.html')
 
-@app.route('/Trending')
+@app.route('/trending')
 def Trending():
     return render_template('trending.html')
 
-@app.route('/Random')
+@app.route('/random')
 def Random():
     return render_template('random.html')
 
-@app.route('/Albums')
+@app.route('/albums')
 def Albums():
     return render_template('albums.html')
-@app.route('/Add')
+@app.route('/add')
 def Add():
     return render_template('add.html')
     
