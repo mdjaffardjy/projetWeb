@@ -47,21 +47,26 @@ def index():
 
 @app.route('/Home')
 def Home():
+    return render_template('home.html')
 
 @app.route('/Latest')
 def Latest():
-    
+    return render_template('latest.html')
+
 @app.route('/Trending')
 def Trending():
-    
+    return render_template('trending.html')
+
 @app.route('/Random')
 def Random():
+    return render_template('random.html')
 
 @app.route('/Albums')
 def Albums():
-
+    return render_template('albums.html')
 @app.route('/Add')
 def Add():
+    return render_template('add.html')
     
     
 
