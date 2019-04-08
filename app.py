@@ -45,30 +45,30 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/Home')
-def Home():
+@app.route('/home')
+def home():
     return render_template('home.html')
 
-@app.route('/Latest')
-def Latest():
+@app.route('/latest')
+def latest():
     return render_template('latest.html')
 
-@app.route('/Trending')
-def Trending():
+@app.route('/trending')
+def trending():
     return render_template('trending.html')
 
-@app.route('/Random')
-def Random():
+@app.route('/random')
+def random():
     return render_template('random.html')
 
-@app.route('/Albums')
-def Albums():
+@app.route('/albums')
+def albums():
     return render_template('albums.html')
-@app.route('/Add')
-def Add():
+@app.route('/add')
+def add():
     return render_template('add.html')
     
-    
+
 
 # Script starts here
 if __name__ == '__main__':
