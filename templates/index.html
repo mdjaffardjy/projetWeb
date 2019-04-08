@@ -1,14 +1,30 @@
 {% extends "base.html" %}
 
 <!-- Begin page content -->
-    <main role="main" class="container">
-    {% block content %}
-    
-	<h1 class="mt-5">Skeleton page</h1>
+<main role="main" class="container">
+{% block content %}
+<h1>Welcome to Neurchi de Bimcave</h1>
 
-	<p>Here is a placeholder</p>
+<p>Browse our image gallery using its multiple functions! </p>
+<h2> <a href="{{ url_for('latest') }}"> Latest </a> </h2>
+  <p> Here you can browse the latest images added to the gallery.</p>
 
-	<img src="math.png" width="50" height="50" ALT="Erreur d'affichage">
-    
-	{% endblock content %}
-    </main>
+<h2> <a href="{{ url_for('trending') }}"> Trending </a> </h2>
+  <p> Browse by trending.</p>
+  
+<h2> <a href="{{ url_for('random') }}"> Random </a> </h2>
+  <p> Discover a random image.</p>
+  
+<h2> <a href="{{ url_for('albums') }}"> Albums </a> </h2>
+  <p> Browse by theme?.</p>
+  
+<h2> <a href="{{ url_for('add') }}"> Add <a> </h2>
+  <p> You can even add your own image to the database !</p>
+  
+<p> While browsing and having fun, you can also give a rating to the images. SImply click on them to access to this functionnality.</p>
+
+
+{% endblock %}
+</main>
+<!-- vim: set filetype=html spell spelllang=en: -->
+
