@@ -45,23 +45,30 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/about')
-def about():
-    app.logger.debug('about')
-    today = datetime.today()
-    # Create a context
-    tpl_context = {}
-    # Populate a context to feed the template
-    # (cf. http://strftime.org/ for string formating with datetime)
-    tpl_context.update({'day': '{:%A}'.format(today)})
-    tpl_context.update({'d_o_month': '{:%d}'.format(today)})
-    tpl_context.update({'month': '{:%B}'.format(today)})
-    tpl_context.update({'time': '{:%X}'.format(today)})
-    tpl_context.update({'date': today})
-    # Now let's see how the context looks like
-    app.logger.debug('About Context: {}'.format(tpl_context))
-    return render_template('about.html', **tpl_context)
+@app.route('/Home')
+def Home():
+    return render_template('home.html')
 
+@app.route('/Latest')
+def Latest():
+    return render_template('latest.html')
+
+@app.route('/Trending')
+def Trending():
+    return render_template('trending.html')
+
+@app.route('/Random')
+def Random():
+    return render_template('random.html')
+
+@app.route('/Albums')
+def Albums():
+    return render_template('albums.html')
+@app.route('/Add')
+def Add():
+    return render_template('add.html')
+    
+    
 
 # Script starts here
 if __name__ == '__main__':
