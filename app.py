@@ -54,15 +54,15 @@ def Latest():
 
 @app.route('/trending')
 def Trending():
-    return render_template('trending.html')
+    return render_template('trending.html',images=IMAGES)
 
 @app.route('/random')
 def Random():
-    return render_template('random.html')
+    return render_template('random.html',images=IMAGES)
 
 @app.route('/albums')
 def Albums():
-    return render_template('albums.html')
+    return render_template('albums.html',images=IMAGES)
 
 @app.route('/add/', methods=['POST','GET'])
 def Add():

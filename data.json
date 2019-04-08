@@ -1,11 +1,11 @@
 {
   "IMAGES" : [
     {"id": 0,
-     "titre": "Math", "note": 0, "chemin": "images/math.jpg", "date":"01/01/19"},
+     "title": "Math", "note": 0, "path": "images/math.jpg", "date":"01/01/19"},
     {"id": 1,
-     "titre": "MinION", "note": 0, "chemin": "images/minion.jpg", "date":"01/01/19"},
+     "title": "MinION", "note": 0, "path": "images/minion.jpg", "date":"01/01/19"},
     {"id": 2,
-     "titre": "Papy", "note": 0, "chemin": "images/papy.jpg", "date":"01/01/19"},
+     "title": "Papy", "note": 0, "path": "images/papy.jpg", "date":"01/01/19"}
 ],
   "THEMES" : {
     "humour": [0,1,2]
