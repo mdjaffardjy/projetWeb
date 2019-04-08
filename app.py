@@ -46,6 +46,7 @@ def index():
 
 
 @app.route('/home')
+<<<<<<< HEAD
 def Home():
     return render_template('home.html')
 
@@ -64,11 +65,12 @@ def Random():
 @app.route('/albums')
 def Albums():
     return render_template('albums.html')
+
 @app.route('/add')
 def Add():
     return render_template('add.html')
     
-    
+
 
 # Script starts here
 if __name__ == '__main__':
