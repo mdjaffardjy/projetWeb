@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+<!-- Begin page content -->
+    <main role="main" class="container">
+    {% block content %}
+	{% if images %}
+          {% for img in images %}
+              <h2 class="mt-5">{{img.title}}</h2>
+              <p>
+              <img src="{{img.path}}" width="50" height="50">
+              Posted on : {{img.date}}
+              Note : {{img.notes}}
+              Related themes : |
+              {% for th in img.themes %}
+                  #{{th}} |
+              {% endfor %}
+              </p>
+              <br />
+          {% endfor %}
+      {% else %}
+          <div class="alert alert-info" role="alert">
+          <p class="lead">No images yet :'(</p>
+          </div>
+      {% endif %}
+    
+	{% endblock content %}
+    </main>
