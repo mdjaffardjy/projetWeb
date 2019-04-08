@@ -8,7 +8,7 @@ from flask import abort, request, make_response
 from flask import render_template, redirect, url_for
 
 app = Flask(__name__)
-
+from data import IMAGES
 
 def deal_with_post():
     # Get the form content
@@ -47,7 +47,7 @@ def index():
 
 @app.route('/latest')
 def Latest():
-    return render_template('latest.html')
+    return render_template('latest.html',images=IMAGES)
 
 @app.route('/trending')
 def Trending():

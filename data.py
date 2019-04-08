@@ -11,17 +11,17 @@ from datetime import date, datetime
 
 with open('data.json') as js:
     DATA = json.load(js)
-    USERS = DATA.get('USERS')
-    FIELDS = DATA.get('FIELDS')
+    IMAGES = DATA.get('IMAGES')
+    THEMES = DATA.get('THEMES')
 
 def get_fields(u_id):
-    for field, ids in FIELDS.items():
+    for field, ids in THEMES.items():
         if u_id in ids:
             yield field
 
 
-for user in USERS:
-    user.update({'fields': [f for f in get_fields(user.get('id'))]})
+for img in IMAGES:
+    img.update({'themes': [f for f in get_fields(img.get('id'))]})
 
 # Script starts here
 if __name__ == '__main__':
