@@ -21,7 +21,7 @@ def get_fields(u_id):
 
 
 for img in IMAGES:
-    img.update({'themes': [f for f in get_fields(user.get('id'))]})
+    img.update({'themes': [f for f in get_fields(img.get('id'))]})
 
 # Script starts here
 if __name__ == '__main__':
