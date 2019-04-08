@@ -1,7 +1,82 @@
 {% extends "base.html" %}
 
+<main role="main" class="container">
 {% block content %}
-<h1>Skeleton page</h1>
+<h1>Welcome to Neurchi de Bimcave</h1>
 
-<p>Here is a placeholder</p>
+<p>Browse our image gallery using its multiple functions! </p>
+<h2> Latest </h2>
+  <p> Here you can browse the latest images added to the gallery.</p>
+
+<h2> Trending </h2>
+  <p> </p>
+  
+<h2> Random </h2>
+  <p> </p>
+  
+<h2> Albums </h2>
+  <p> </p>
+
+<h2> Add </h2>
+  <p> </p>
+
+
+  <article>
+  <div class="to_hide"><hr /></div>
+  <h2>Introduction to Flask micro framework</h2>
+    <p>Instantiate a <a href="http://flask.pocoo.org/docs/1.0/api/#response-objects">Response</a> object with <a
+                        href="http://flask.pocoo.org/docs/1.0/api/#flask.Flask.make_response">make_response</a>:<br />
+                    cf. <a href="http://flask.pocoo.org/docs/1.0/api/#flask.make_response">flask.pocoo.org/docs/1.0/api/#flask.make_response</a>.<br />
+                    → Add the following headers:</p>
+    <ul>
+      <li>Non standard header, choice is yours</li>
+      <li>Media type header: <span class="font-weight-bold">
+          <a href="https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Type">content-type</a></span>
+      </li>
+      <li>content language:  <span class="font-weight-bold">
+          <a href="https://developer.mozilla.org/fr/docs/Web/HTTP/Headers/Content-Language">content-language</a></span>
+      </li>
+    </ul>
+    <h3>Explore request to build a response accordingly</h3>
+    <p>→ Serve a <a href="https://en.wikipedia.org/wiki/Language_localisation">localized</a> respecting <code>Accept-Language</code>
+    request headers (languages of your choice).<br />
+    Falls back to English if not translated.</p>
+    <p>Then you can control headers returned with <strong>curl</strong>, for different languages:</p>
+    <pre>curl --head -H"Accept-Language: LANG" http://127.0.0.1:8000/hello_world</pre>
+    <p>You can also check both response <strong>headers</strong> and <strong>body</strong>:</p>
+    <pre>curl -H"Accept-Language: LANG" http://127.0.0.1:8000/hello_world</pre>
+
+
+    <p>To do so, expose <code>page_title</code> variable in the template when
+    calling <code>render_template</code>.<br />
+    <a href="http://flask.pocoo.org/docs/1.0/api/#flask.render_template">doc: render_template</a><br />
+    <a href="http://jinja.pocoo.org/docs/2.10/templates/">Template quick start</a><br />
+    <a href="http://flask.pocoo.org/docs/1.0/quickstart/#rendering-templates">example: render_template</a>
+    </p>
+
+    <h3>List users</h3>
+    <p>A list of users is available in <code>data.py</code> (a pseudo SGDB mockup).<br />
+    Explore the data with the command line console:</p>
+    <pre>ipython3 -i -m data</pre>
+    <pre>python3 -c'import data, pprint;pprint.pprint(data.USERS)'</pre>
+
+    <p>You will to modify <code>users</code> function in <code>app.py</code> and the template <code>templates/users.html</code> to format the user list.</p>
+    <p>Please refer to the template engine documentation online: <a href="http://jinja.pocoo.org/docs/2.10/templates/">jinja.pocoo.org/docs/2.10/templates/</a>
+
+    <h3>Setup the search page (users lookup)</h3>
+    <p>Implement the <code>search</code> endpoint.</p>
+    <p>Use the search button and input field (page top right) to search a user.</p>
+    <p>To access the search pattern, refer to flask documentation about <strong>Accessing Request Data</strong>: <a href="http://flask.pocoo.org/docs/1.0/quickstart/#accessing-request-data">flask.pocoo.org/docs/1.0/quickstart/#accessing-request-data</a></p>
+    <p class="font-italic">Hint: You can reuse the <code>users.html</code> template, KISS principle!</p>
+
+    <h3>Add a user to the list</h3> form to add a new user.<p>
+    <p>Here is some docs about forms:</p>
+    <ul>
+      <li><a href="https://developer.mozilla.org/docs/Web/HTML/Element/Form">developer.mozilla.org/docs/Web/HTML/Element/Form</a></li>
+      <li><a href="https://www.w3schools.com/html/html_forms.asp">https://www.w3schools.com/html/html_forms.asp</a></li>
+    </ul>
+
+  </article>
 {% endblock %}
+</main>
+<!-- vim: set filetype=html spell spelllang=en: -->
