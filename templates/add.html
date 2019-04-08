@@ -1,7 +1,29 @@
 {% extends "base.html" %}
 
-{% block content %}
-<h1>Skeleton page</h1>
+<!-- Begin page content -->
+    <main role="main" class="container">
+    {% block content %}
+    
+	<h1 class="mt-5">Add a new contribution !</h1>
+	
+    <form method="post" action="/add/">
+      	Title : 
+        <input class="form-control mr-sm-2" type="text" name="title" placeholder="A cool title" required>
+        <br>
+        Add from URL : 
+        <input class="form-control mr-sm-2" type="text" name="url" required>
+        <br>
+		Or select a file from your computer : 
+        <input class="form-control mr-sm-2" type="text" name="upload" placeholder="Pas encore possible">
+        <br>
+		Add some themes related to your meme :
+		<input class="form-control mr-sm-2" type="text" name="themes" placeholder="theme1 ; theme2 ; theme3" >
+		<br><br>
+       	<input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Submit">
+		<input class="btn btn-outline-failed" type="reset" value="Clear">
+    </form> 
+    
+	{% endblock content %}
+    </main>
 
-<p>Here is a placeholder</p>
-{% endblock %}
+
