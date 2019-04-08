@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>About page</h1>
+
+<p>Today is {{ day }} the {{ d_o_month }} of {{ month }} ! Its {{ time }}.</p>
+
+<p>
+{% if date.hour|int < 12 and date.hour > 5 %}Good morning!
+{% elif date.hour|int >= 18 and date.hour|int < 22 %}Good evening!
+{% elif date.hour|int >= 22 %}Good night!
+{% endif %}</p>
+
+{% endblock %}
