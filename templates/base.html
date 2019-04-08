@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-  	<title>{{page_title|default('BioInfo 4A Web dev Introdution') }}</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="icon" href="https://www.insa-lyon.fr/sites/www.insa-lyon.fr/files/insa_favicon.ico">
+  	<title>Neurchi de BIM Cave</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{{ url_for('static', filename='bootstrap.css') }}" rel="stylesheet">
@@ -18,15 +21,12 @@
   	<header>
       <!-- Fixed navbar -->
       <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="/">Neurchi de BIM Cave</a>
+        <a class="navbar-brand" href="{{ url_for('index') }}">Neurchi de BIM Cave</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="{{ url_for('index') }}">Home <span class="sr-only">(current)</span></a>
-            </li>
             <li class="nav-item">
               <a class="nav-link" href="{{ url_for('Latest') }}">Latest</a>
             </li>
@@ -53,7 +53,16 @@
     </header>
 
 
-{% block content %}{% endblock %}
+    <!-- Begin page content -->
+    <main role="main" class="container">
+    {% block content %}{% endblock content %}
+    </main>
+    
+    <footer class="footer">
+      <div class="container">
+        <span class="text-muted">By DJAFFARDJY Marine - JACQUEMET Elise - MOREAL DE BREVANS Théophile</span>
+      </div>
+    </footer>
 
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="{{ url_for('static', filename='script.js') }}"></script>
