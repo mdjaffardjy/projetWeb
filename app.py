@@ -44,9 +44,7 @@ def index():
     app.logger.debug('serving root URL /')
     return render_template('index.html')
 
-
 @app.route('/home')
-<<<<<<< HEAD
 def Home():
     return render_template('home.html')
 
