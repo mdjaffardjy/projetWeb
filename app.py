@@ -7,11 +7,13 @@ from flask import Flask
 from flask import abort, request, make_response
 from flask import render_template, redirect, url_for
 from random import choice
+import datetime
 
 app = Flask(__name__)
 from data import IMAGES
 from data import THEMES
 BUTTONS=["submit"]*len(IMAGES)
+NB_IMAGES=len(IMAGES)
 
 def deal_with_post():
     # Get the form content
@@ -90,12 +92,15 @@ def form():
     return response
 
 def upvote(IDimg):
-    IMAGES[IDimg]["note"]+=1
-    BUTTONS[IDimg]="hidden"
+    for img in IMAGES :
+        if IDimg == img['id'] :
+            img["note"]+=1
+            BUTTONS[IDimg]="hidden"
 
 
 @app.route('/add/', methods=['POST','GET'])
 def add():
+    NB_IMAGES=len(IMAGES)
     app.logger.debug('add')
     form=request.form
 #    if str(form['themes'])!="NA" :
@@ -103,8 +108,10 @@ def add():
 #    else :
 #        th=[]
     path=form['url']
-    newImg={'title': form['title'], 'path': path, 'note': 0}
+    newImg={'ID': NB_IMAGES, 'date': str(datetime.datetime.now()), 'title': form['title'], 'path': path, 'note': 0}
     IMAGES.append(newImg)
+    BUTTONS.append("submit")
+    NB_IMAGES=len(IMAGES)
     response = render_template('form.html')
     return response
 
