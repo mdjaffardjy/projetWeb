@@ -1,3 +1,28 @@
-{% extends "affImg.html" %}
+{% extends "base.html" %}
+
+<!-- Begin page content -->
+    <main role="main" class="container">
+    {% block content %}
+	{% if themes %}
+          {% for t in themes.keys() %}              
+              <a href="search/?pattern={{t}}&regexp=on"><h2 class="mt-5">{{t}}</h2></a>
+              <div class="container" nowrap="nowrap">
+              {% for i in themes[t] %}
+              		<div class="gallery">
+              		<a href="search/?pattern={{images[i].title}}"><img width="600" height="400"src="{{images[i].path}}"></a>
+              		<p>{{images[i].title}}</p>
+              		</div>
+              {% endfor %}
+              </div>
+          {% endfor %}
+      {% else %}
+	  <h1>Sorry ...</h1>
+          <div class="alert alert-info" role="alert">
+          <p class="error">No images were found :'(</p>
+          </div>
+      {% endif %}
+    
+	{% endblock content %}
+    </main>
 
 

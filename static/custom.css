@@ -64,9 +64,10 @@ img {
   max-width: 50%;
 }
 
-p.info {
+div.info {
+  color: grey;
   text-align: center;
-  background-color: rgba(255, 99, 71, 0.2); 
+  background-color: rgba(230, 242, 255, 0.5); 
   border-radius: 8px;
   display: block;
   margin-left: auto;
@@ -76,19 +77,41 @@ p.info {
 
 }
 
-/* Likes
+/* Gallery
 -------------------------------------------------- */
-img.heart{
-  width: 20px;
-  heigth: 20px;
+div.container{
+  width: 90%;
+  overflow-y: hidden;
+  overflow-x: auto;
+  white-space: nowrap;
 }
 
-img.heart:hover{
-  opacity: 0.5;
+div.gallery {
+  margin: 10px;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  width: 200px;
+  height: 200px;
+  white-space: nowrap;
+  display: inline-block;
 }
 
-img.heart:visited {
-  color: green;
+div.gallery:hover {
+  box-shadow: 1px 1px 2px black, 0 0 25px #66b3ff, 0 0 5px #e6f2ff;
+  border: 1px solid #777;
 }
 
+div.gallery img {
+  border-radius: 0px;
+  display: block;
+  margin-left: 0px;
+  margin-right: 0px;
+  max-height: 80%;
+  max-width: 100%;
+  width: 100%;
+}
 
+div.gallery p {
+  padding: 6px;
+  text-align: center;
+}

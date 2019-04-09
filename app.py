@@ -10,6 +10,8 @@ from random import choice
 
 app = Flask(__name__)
 from data import IMAGES
+from data import THEMES
+BUTTONS=["submit"]*len(IMAGES)
 
 def deal_with_post():
     # Get the form content
@@ -46,30 +48,51 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/latest')
+@app.route('/latest', methods=['POST','GET'])
 def latest():
-    return render_template('latest.html',images=IMAGES)
+    app.logger.debug('latest')
+    ID=request.args.get('ID')
+    if ID :
+        upvote(int(ID))
+    return render_template('latest.html',images=IMAGES,buttons=BUTTONS)
 
-@app.route('/trending')
+@app.route('/trending', methods=['POST','GET'])
 def trending():
-    return render_template('trending.html',images=IMAGES)
+    app.logger.debug('trending')
+    ID=request.args.get('ID')
+    if ID :
+        upvote(int(ID))
+    return render_template('trending.html',images=IMAGES,buttons=BUTTONS)
 
-@app.route('/random')
+@app.route('/random', methods=['POST','GET'])
 def random():
+    app.logger.debug('random')
     new=[]
     randomImg = choice(IMAGES)
     new.append(randomImg)
-    return render_template('random.html',images=new)
+    ID=request.args.get('ID')
+    if ID :
+        upvote(int(ID))
+    return render_template('random.html',images=new,buttons=BUTTONS)
 
-@app.route('/albums')
+@app.route('/albums', methods=['POST','GET'])
 def albums():
-    return render_template('albums.html',images=IMAGES)
+    app.logger.debug('albums')
+    ID=request.args.get('ID')
+    if ID :
+        upvote(int(ID))
+    return render_template('albums.html',themes=THEMES,images=IMAGES)
 
 
 @app.route('/form', methods=['POST','GET'])
 def form():
     response = render_template('form.html')
     return response
+
+def upvote(IDimg):
+    IMAGES[IDimg]["note"]+=1
+    BUTTONS[IDimg]="hidden"
+
 
 @app.route('/add/', methods=['POST','GET'])
 def add():
@@ -103,7 +126,7 @@ def search():
                 if sw.capitalize() in img['title'].capitalize() :
                     RES.append(img)
     if request.method == 'GET':
-        response = render_template('search.html',images=RES, sw=sw, r=r)
+        response = render_template('search.html',images=RES, sw=sw, r=r,buttons=BUTTONS)
     else :
         response = render_template('search.html',error=error)
     return response
