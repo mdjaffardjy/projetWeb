@@ -34,7 +34,8 @@ def latest():
     ID=request.args.get('ID')
     if ID :
         upvote(int(ID))
-    return render_template('latest.html',images=IMAGES,themes=THEMES,buttons=BUTTONS)
+    RES = sorted(IMAGES, key=lambda k: k['date'], reverse=True) 
+    return render_template('latest.html',images=RES,themes=THEMES,buttons=BUTTONS)
 
 @app.route('/trending', methods=['POST','GET'])
 def trending():
@@ -42,7 +43,8 @@ def trending():
     ID=request.args.get('ID')
     if ID :
         upvote(int(ID))
-    return render_template('trending.html',images=IMAGES,themes=THEMES,buttons=BUTTONS)
+    RES = sorted(IMAGES, key=lambda k: k['note'], reverse=True) 
+    return render_template('trending.html',images=RES,themes=THEMES,buttons=BUTTONS)
 
 @app.route('/random', methods=['POST','GET'])
 def random():
@@ -93,8 +95,8 @@ def add():
             THEMES[t].append(NB_IMAGES)
         else :
             THEMES[t]=[NB_IMAGES]
-    path=form['url']
-    newImg={'id': NB_IMAGES, 'date': str(datetime.now()), 'title': form['title'], 'path': path, 'note': 0}
+    url=form['url']
+    newImg={'id': NB_IMAGES, 'date': str(datetime.now()), 'title': form['title'], 'url': url, 'note': 0}
     IMAGES.append(newImg)
     BUTTONS.append("submit")
     NB_IMAGES=len(IMAGES)
