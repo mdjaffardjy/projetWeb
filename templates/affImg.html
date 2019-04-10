@@ -7,7 +7,7 @@
           {% for img in images %}              
               <h2 class="caption">{{img.title}}</h2>
 	      <p>
-              <img src="{{img.path}}">
+              <img src={{url_for('static',filename="images/"+img.path)}} />
               </p>
               <div class="info">
               Posted on : {{img.date}}<br />

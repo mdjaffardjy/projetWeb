@@ -9,7 +9,7 @@ from flask import render_template, redirect, url_for
 from random import choice
 import datetime
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
 from data import IMAGES
 from data import THEMES
 BUTTONS=["submit"]*len(IMAGES)
