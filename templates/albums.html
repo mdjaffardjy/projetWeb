@@ -9,7 +9,11 @@
               <div class="container" nowrap="nowrap">
               {% for i in themes[t] %}
               		<div class="gallery">
-              		<a href="search/?pattern={{images[i].title}}"><img width="600" height="400"src="{{images[i].path}}"></a>
+              		{% if images[i].path %}
+                        <a href="search/?pattern={{images[i].title}}"><img width="600" height="400"src={{url_for('static',filename="images/"+images[i].path)}}></a>
+                   {% else %}
+                      <a href="search/?pattern={{images[i].title}}"><img width="600" height="400"src="{{images[i].url}}"></a>
+                   {% endif %}
               		<p>{{images[i].title}}</p>
               		</div>
               {% endfor %}

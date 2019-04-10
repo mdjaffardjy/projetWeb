@@ -54,6 +54,21 @@ h2.nocount:before, h3.nocount:before, h4.nocount:before, h5.nocount:before, h6.n
     counter-increment : none;
 }
 
+/* Save Database
+-------------------------------------------------- */
+button.save{
+  background-color: rgba(230, 242, 255, 0); 
+  color: rgb(51, 153, 255); 
+  border: 1px solid rgb(51, 153, 255);
+  margin-right: 10px;
+}
+
+button.save:hover{
+  background-color: rgb(51, 153, 255) ;
+  color: white; 
+}
+
+
 /* Images
 -------------------------------------------------- */
 img {
