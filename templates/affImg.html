@@ -6,8 +6,12 @@
 	{% if images %}
           {% for img in images %}              
               <h2 class="caption">{{img.title}}</h2>
-	      <p>
-              <img src="{{img.path}}">
+	          <p>
+	          {% if img.path %}
+                  <img src={{url_for('static',filename="images/"+img.path)}} />
+              {% else %}
+                  <img src={{img.url}} />
+              {% endif %}
               </p>
               <div class="info">
               Posted on : {{img.date[5:7]}}.{{img.date[8:10]}}.{{img.date[0:4]}} at {{img.date[11:13]}}H{{img.date[14:16]}}<br />

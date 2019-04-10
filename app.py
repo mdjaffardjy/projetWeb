@@ -10,7 +10,8 @@ from random import choice
 import json
 import copy
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
+
 from data import Images
 from data import Themes
 
