@@ -3,10 +3,12 @@
 
 from datetime import datetime
 
-from flask import Flask
+from flask import Flask, flash
 from flask import abort, request, make_response
 from flask import render_template, redirect, url_for
 from random import choice
+from werkzeug.utils import secure_filename
+import datetime
 import json
 import copy
 
@@ -20,6 +22,10 @@ print(type(IMAGES))
 THEMES=copy.deepcopy(Themes)
 BUTTONS=["submit"]*len(IMAGES)
 NB_IMAGES=len(IMAGES)
+UPLOAD_FOLDER = '/static/images'
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
+
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 
 @app.route('/')
