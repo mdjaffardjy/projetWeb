@@ -44,6 +44,9 @@
               <a class="nav-link" href="{{ url_for('form') }}">Add Contribution</a>
             </li>
           </ul>
+          <form class="form-inline mt-2 mt-md-0" method="get" action="/save/">
+          	<button class="btn save" type="submit">Save database</button><br/>
+          </form>
           <form class="form-inline mt-2 mt-md-0" method="get" action="/search/">
             <input class="form-control mr-sm-2" placeholder="Search" aria-label="Search" type="text" name="pattern">
             <input class="form-control mr-sm-2" type="checkbox" aria-label="Search by field :" name="regexp">
@@ -61,7 +64,7 @@
     
     <footer class="footer">
       <div class="container">
-        <span class="text-muted">By DJAFFARDJY Marine - JACQUEMET Elise - MOREAL DE BREVANS Théophile</span>
+        <span class="text-muted">By : DJAFFARDJY Marine - JACQUEMET Elise - MOREAL DE BREVANS Théophile</span>
       </div>
     </footer>
 

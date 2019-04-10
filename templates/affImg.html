@@ -10,7 +10,7 @@
               <img src="{{img.path}}">
               </p>
               <div class="info">
-              Posted on : {{img.date}}<br />
+              Posted on : {{img.date[5:7]}}.{{img.date[8:10]}}.{{img.date[0:4]}} at {{img.date[11:13]}}H{{img.date[14:16]}}<br />
               {{img.note}}    <i class="fas fa-heart" style="color:Crimson;"></i>
               <form method="get">
                 <input type="HIDDEN" name="ID" value={{img.id}} >
@@ -18,14 +18,16 @@
               <br/></form> 
               <br />
               |
-              {% for th in img.themes %}
-                  #{{th}} |
+              {% for th in themes.keys() %}
+                  {% if img.id in themes[th] %}
+                  	#{{th}} |
+                  {% endif %}
               {% endfor %}
               </div>
               <br /><hr/>
           {% endfor %}
       {% else %}
-	  <h1>Sorry ...</h1>
+	  <h1 class="mt-5" >Sorry ...</h1>
           <div class="alert alert-info" role="alert">
           <p class="error">No images were found :'(</p>
           </div>

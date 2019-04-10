@@ -7,41 +7,18 @@ from flask import Flask
 from flask import abort, request, make_response
 from flask import render_template, redirect, url_for
 from random import choice
-import datetime
+import json
+import copy
 
 app = Flask(__name__)
-from data import IMAGES
-from data import THEMES
+from data import Images
+from data import Themes
+
+IMAGES=copy.deepcopy(Images)
+print(type(IMAGES))
+THEMES=copy.deepcopy(Themes)
 BUTTONS=["submit"]*len(IMAGES)
 NB_IMAGES=len(IMAGES)
-
-def deal_with_post():
-    # Get the form content
-    form = request.form
-    app.logger.debug(dict(form))
-    # Do whatever you need with the data
-    # Returns code 201 for "created" status
-    return 'Hello, World! You posted {}'.format(dict(form.items())), 201
-
-
-@app.route('/hello_world', methods=['GET', 'POST'])
-def hello_world():
-    # You may use this logger to print any variable in 
-    # the terminal running the web server
-    app.logger.debug('Running the hello_world function')
-    app.logger.debug('Client request: method:"{0.method}'.format(request))
-    if request.method == 'POST':
-        # Use curl to post some data
-        # curl -d"param=value" -X POST http://127.0.0.1:8000/hello_world
-        return deal_with_post()
-    # Open http://127.0.0.1:8000/hello_world?key=value&foo=bar&name=yourself
-    # and have a look at the logs in the terminal running the server
-    app.logger.debug('request arguments: {}'.format(request.args))
-    if request.args:
-        if 'name' in request.args.keys():
-            # Use the query string argument to format the response
-            return 'Hello {name} !'.format(**request.args), 200
-    return 'Hello, World!', 200
 
 
 @app.route('/')
@@ -56,7 +33,7 @@ def latest():
     ID=request.args.get('ID')
     if ID :
         upvote(int(ID))
-    return render_template('latest.html',images=IMAGES,buttons=BUTTONS)
+    return render_template('latest.html',images=IMAGES,themes=THEMES,buttons=BUTTONS)
 
 @app.route('/trending', methods=['POST','GET'])
 def trending():
@@ -64,7 +41,7 @@ def trending():
     ID=request.args.get('ID')
     if ID :
         upvote(int(ID))
-    return render_template('trending.html',images=IMAGES,buttons=BUTTONS)
+    return render_template('trending.html',images=IMAGES,themes=THEMES,buttons=BUTTONS)
 
 @app.route('/random', methods=['POST','GET'])
 def random():
@@ -75,7 +52,7 @@ def random():
     ID=request.args.get('ID')
     if ID :
         upvote(int(ID))
-    return render_template('random.html',images=new,buttons=BUTTONS)
+    return render_template('random.html',images=new,themes=THEMES, buttons=BUTTONS)
 
 @app.route('/albums', methods=['POST','GET'])
 def albums():
@@ -96,22 +73,31 @@ def upvote(IDimg):
         if IDimg == img['id'] :
             img["note"]+=1
             BUTTONS[IDimg]="hidden"
+    save(IMAGES,THEMES)
 
 
 @app.route('/add/', methods=['POST','GET'])
 def add():
+    print("\nADD\n")
     NB_IMAGES=len(IMAGES)
     app.logger.debug('add')
     form=request.form
-#    if str(form['themes'])!="NA" :
-#        th=[str(form['themes'])]
-#    else :
-#        th=[]
+    if str(form['themes'])!="NA" :
+        print("\nhey\n")
+        th=str(form['themes']).split(";")
+    else :
+        th=[]
+    for t in th :
+        if t in THEMES.keys():
+            THEMES[t].append(NB_IMAGES)
+        else :
+            THEMES[t]=[NB_IMAGES]
     path=form['url']
-    newImg={'ID': NB_IMAGES, 'date': str(datetime.datetime.now()), 'title': form['title'], 'path': path, 'note': 0}
+    newImg={'id': NB_IMAGES, 'date': str(datetime.now()), 'title': form['title'], 'path': path, 'note': 0}
     IMAGES.append(newImg)
     BUTTONS.append("submit")
     NB_IMAGES=len(IMAGES)
+    save(IMAGES,THEMES)
     response = render_template('form.html')
     return response
 
@@ -122,6 +108,10 @@ def search():
     error = None
     sw = request.args.get('pattern')
     r = request.args.get('regexp')
+    ID=request.args.get('ID')
+    if ID :
+        upvote(int(ID))
+        response = render_template('latest.html',images=IMAGES, themes=THEMES, buttons=BUTTONS)
     RES=[]
     if sw :
         if r=="on" : # RECHERCHE PAR THEME
@@ -132,11 +122,17 @@ def search():
             for img in IMAGES :
                 if sw.capitalize() in img['title'].capitalize() :
                     RES.append(img)
-    if request.method == 'GET':
-        response = render_template('search.html',images=RES, sw=sw, r=r,buttons=BUTTONS)
+        response = render_template('search.html',images=RES,themes=THEMES, sw=sw, r=r,buttons=BUTTONS)
     else :
         response = render_template('search.html',error=error)
     return response
+
+def save(tab1,tab2):
+    print("\nSAVE\n")
+    print(len(tab1))
+    app.logger.debug('save')
+    with open("data.json","w",encoding="utf-8") as file:
+        json.dump({"Images": tab1,"Themes": tab2}, file, indent=4)
 
 # Script starts here
 if __name__ == '__main__':
