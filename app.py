@@ -3,10 +3,11 @@
 
 from datetime import datetime
 
-from flask import Flask
+from flask import Flask, flash
 from flask import abort, request, make_response
 from flask import render_template, redirect, url_for
 from random import choice
+from werkzeug.utils import secure_filename
 import datetime
 
 app = Flask(__name__, static_url_path='/static')
@@ -14,6 +15,10 @@ from data import IMAGES
 from data import THEMES
 BUTTONS=["submit"]*len(IMAGES)
 NB_IMAGES=len(IMAGES)
+UPLOAD_FOLDER = '/static/images'
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
+
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 def deal_with_post():
     # Get the form content
