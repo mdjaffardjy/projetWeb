@@ -12,9 +12,7 @@ import json
 import copy
 
 app = Flask(__name__, static_url_path='/static')
-
-from data import Images
-from data import Themes
+from data import Images, Themes, get_fields
 
 IMAGES=copy.deepcopy(Images)
 print(type(IMAGES))
@@ -36,7 +34,7 @@ def index():
 @app.route('/latest', methods=['POST','GET'])
 def latest():
     app.logger.debug('latest')
-    ID=request.args.get('ID')
+    ID=request.form['ID']
     if ID :
         upvote(int(ID))
     RES = sorted(IMAGES, key=lambda k: k['date'], reverse=True) 
@@ -45,7 +43,7 @@ def latest():
 @app.route('/trending', methods=['POST','GET'])
 def trending():
     app.logger.debug('trending')
-    ID=request.args.get('ID')
+    ID=request.form['ID']
     if ID :
         upvote(int(ID))
     RES = sorted(IMAGES, key=lambda k: k['note'], reverse=True) 
@@ -57,7 +55,7 @@ def random():
     new=[]
     randomImg = choice(IMAGES)
     new.append(randomImg)
-    ID=request.args.get('ID')
+    ID=request.form['ID']
     if ID :
         upvote(int(ID))
     return render_template('random.html',images=new,themes=THEMES, buttons=BUTTONS)
@@ -65,7 +63,7 @@ def random():
 @app.route('/albums', methods=['POST','GET'])
 def albums():
     app.logger.debug('albums')
-    ID=request.args.get('ID')
+    ID=request.form['ID']
     if ID :
         upvote(int(ID))
     return render_template('albums.html',themes=THEMES,images=IMAGES)
@@ -116,7 +114,7 @@ def search():
     error = None
     sw = request.args.get('pattern')
     r = request.args.get('regexp')
-    ID=request.args.get('ID')
+    ID=request.form['ID']
     if ID :
         upvote(int(ID))
         response = render_template('latest.html',images=IMAGES, themes=THEMES, buttons=BUTTONS)
@@ -124,7 +122,7 @@ def search():
     if sw :
         if r=="on" : # RECHERCHE PAR THEME
             for img in IMAGES :
-                if sw in img['themes'] :
+                if sw in get_fields(img['id']) :
                     RES.append(img)
         else : # RECHERCHE PAR MOTS CLES
             for img in IMAGES :
