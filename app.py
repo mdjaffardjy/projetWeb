@@ -8,7 +8,6 @@ from flask import abort, request, make_response
 from flask import render_template, redirect, url_for
 from random import choice
 from werkzeug.utils import secure_filename
-import datetime
 import json
 import copy
 
