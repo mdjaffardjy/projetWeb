@@ -33,19 +33,21 @@ def index():
 
 @app.route('/latest', methods=['POST','GET'])
 def latest():
-    app.logger.debug('latest')
-    ID=request.form['ID']
-    if ID :
-        upvote(int(ID))
+    app.logger.debug(request.form)
+    if request.method == 'POST':
+        ID=request.form['ID']
+        if ID :
+            upvote(int(ID))
     RES = sorted(IMAGES, key=lambda k: k['date'], reverse=True) 
     return render_template('latest.html',images=RES,themes=THEMES,buttons=BUTTONS)
 
 @app.route('/trending', methods=['POST','GET'])
 def trending():
     app.logger.debug('trending')
-    ID=request.form['ID']
-    if ID :
-        upvote(int(ID))
+    if request.method == 'POST':
+        ID=request.form['ID']
+        if ID :
+            upvote(int(ID))
     RES = sorted(IMAGES, key=lambda k: k['note'], reverse=True) 
     return render_template('trending.html',images=RES,themes=THEMES,buttons=BUTTONS)
 
@@ -55,17 +57,19 @@ def random():
     new=[]
     randomImg = choice(IMAGES)
     new.append(randomImg)
-    ID=request.form['ID']
-    if ID :
-        upvote(int(ID))
+    if request.method == 'POST':
+        ID=request.form['ID']
+        if ID :
+            upvote(int(ID))
     return render_template('random.html',images=new,themes=THEMES, buttons=BUTTONS)
 
 @app.route('/albums', methods=['POST','GET'])
 def albums():
     app.logger.debug('albums')
-    ID=request.form['ID']
-    if ID :
-        upvote(int(ID))
+    if request.method == 'POST':
+        ID=request.form['ID']
+        if ID :
+            upvote(int(ID))
     return render_template('albums.html',themes=THEMES,images=IMAGES)
 
 
@@ -111,26 +115,27 @@ def add():
 def search():
     app.logger.debug('search')
     #abort(make_response('Not implemented yet ;)', 501))
-    error = None
-    sw = request.args.get('pattern')
-    r = request.args.get('regexp')
-    ID=request.form['ID']
-    if ID :
-        upvote(int(ID))
-        response = render_template('latest.html',images=IMAGES, themes=THEMES, buttons=BUTTONS)
-    RES=[]
-    if sw :
-        if r=="on" : # RECHERCHE PAR THEME
-            for img in IMAGES :
-                if sw in get_fields(img['id']) :
-                    RES.append(img)
-        else : # RECHERCHE PAR MOTS CLES
-            for img in IMAGES :
-                if sw.capitalize() in img['title'].capitalize() :
-                    RES.append(img)
-        response = render_template('search.html',images=RES,themes=THEMES, sw=sw, r=r,buttons=BUTTONS)
-    else :
-        response = render_template('search.html',error=error)
+    if request.method == 'POST':
+        ID=request.form['ID']
+        if ID :
+            upvote(int(ID))
+            response = render_template('latest.html',images=IMAGES, themes=THEMES, buttons=BUTTONS)
+    if request.method == 'GET':
+        sw = request.args.get('pattern')
+        r = request.args.get('regexp')
+        RES=[]
+        if sw :
+            if r=="on" : # RECHERCHE PAR THEME
+                for img in IMAGES :
+                    if sw in get_fields(img['id']) :
+                        RES.append(img)
+            else : # RECHERCHE PAR MOTS CLES
+                for img in IMAGES :
+                    if sw.capitalize() in img['title'].capitalize() :
+                        RES.append(img)
+            response = render_template('search.html',images=RES,themes=THEMES, sw=sw, r=r,buttons=BUTTONS)
+        else :
+            response = render_template('search.html')
     return response
 
 def save(tab1,tab2):
